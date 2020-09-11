@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">TableRegistration</string>
+    <string name="app_name">Table Registration</string>
+    <string name="title_reservation">Reserve a Table</string>
 </resources>
