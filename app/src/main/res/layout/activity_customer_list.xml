@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".CustomerListActivity">
 
+    <include
+        android:id="@+id/activity_title"
+        layout="@layout/colored_rounded_text_view"
+        android:text="@string/customer_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,19 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/colored_bar"
-        android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:background="@drawable/circle"
+    <include
+        android:id="@+id/activity_title"
+        layout="@layout/colored_rounded_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/title_reservation"
-        android:gravity="center"
-        android:textColor="@color/colorWhite"
-        android:paddingBottom="100dp"
-        android:textSize="30sp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
