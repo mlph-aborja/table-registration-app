@@ -1,6 +1,5 @@
 package com.example.tableregistration
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,9 +8,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, LifecycleOwner {
+
+    private lateinit var tableViewModel: TableViewModel
 
     private val tables by lazy {
         arrayOf<Button>(table1, table2, table3, table4)
@@ -21,8 +24,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Set tables onclick listener
-        tables.iterator().forEach { table -> table.setOnClickListener(this) }
+        tableViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application))
+            .get(TableViewModel::class.java)
+
+        // Set tables
+        tableViewModel.tables.observe(this, {
+            Log.i(LOG_OBSERVE_TABLE_CHANGE, "onCreate: TableViewModel Change")
+            tables.forEachIndexed { index, table ->
+                table.text = it[index].name
+                table.setOnClickListener(this)
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,12 +60,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             else -> ""
         }
 
-        Log.i(Tag.SELECTED_TABLE.name, "onClick: $table")
+        Log.i(LOG_SELECTED_TABLE, "onClick: $table")
 
         val intent = Intent(this, CustomerListActivity::class.java).apply {
             putExtra("table", table)
         }
+
         startActivity(intent)
+
     }
 
 

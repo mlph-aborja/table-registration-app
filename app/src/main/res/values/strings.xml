@@ -3,4 +3,8 @@
     <string name="title_reservation">Reserve a Table</string>
     <string name="add_customer">Add Customer</string>
     <string name="clear_tables">Clear Tables</string>
+    <string name="table_1">Table 1</string>
+    <string name="table_2">Table 2</string>
+    <string name="table_3">Table 3</string>
+    <string name="table_4">Table 4</string>
 </resources>
