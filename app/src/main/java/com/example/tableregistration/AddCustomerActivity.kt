@@ -7,6 +7,8 @@ import kotlinx.android.synthetic.main.activity_add_customer.*
 
 class AddCustomerActivity : AppCompatActivity() {
 
+
+
     private val activityTitle by lazy {
         findViewById<TextView>(R.id.activity_title)
     }
@@ -16,5 +18,7 @@ class AddCustomerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_customer)
 
         activityTitle.text = getString(R.string.add_customer)
+
+
     }
 }
