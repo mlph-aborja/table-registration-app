@@ -51,6 +51,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, LifecycleOwner {
             val intent = Intent(this, AddCustomerActivity::class.java)
             startActivity(intent)
             return true
+        } else if (item.itemId == R.id.menu_clear_tables) {
+            tableViewModel.clearTables()
+            return true
         }
         return super.onOptionsItemSelected(item)
     }

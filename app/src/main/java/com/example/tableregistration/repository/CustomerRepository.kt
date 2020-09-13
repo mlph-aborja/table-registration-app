@@ -24,4 +24,8 @@ class CustomerRepository(val app: Application) {
     fun saveCustomer(customer: Customer) {
         customerDao.save(customer)
     }
+
+    fun deleteAllCustomer() {
+        customerDao.deleteAll()
+    }
 }
