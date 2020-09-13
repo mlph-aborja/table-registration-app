@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCustomerActivity">
+    tools:context=".activity.AddCustomerActivity">
 
     <include
         android:id="@+id/activity_title"
@@ -31,7 +31,7 @@
             android:layout_margin="15dp"/>
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/customer_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -41,7 +41,7 @@
             android:layout_margin="15dp"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/add_customer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"

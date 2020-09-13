@@ -1,0 +1,7 @@
+package com.example.tableregistration.constant
+
+const val LOG_SELECTED_TABLE = "SELECTED_TABLE"
+const val LOG_INIT_TABLE_VIEW_MODEL = "INIT_TABLE_VIEW_MODEL"
+const val LOG_OBSERVE_TABLE_CHANGE = "OBSERVE_TABLE_CHANGE"
+const val LOG_INIT_TABLE = "INIT_TABLE"
+const val LOG_ADD_NEW_CUSTOMER = "ADD_NEW_CUSTOMER"

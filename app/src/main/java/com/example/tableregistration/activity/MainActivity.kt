@@ -1,4 +1,4 @@
-package com.example.tableregistration
+package com.example.tableregistration.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,10 @@ import android.view.View
 import android.widget.Button
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
+import com.example.tableregistration.constant.LOG_OBSERVE_TABLE_CHANGE
+import com.example.tableregistration.constant.LOG_SELECTED_TABLE
+import com.example.tableregistration.R
+import com.example.tableregistration.model.TableViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, LifecycleOwner {
@@ -31,7 +35,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, LifecycleOwner {
         tableViewModel.tables.observe(this, {
             Log.i(LOG_OBSERVE_TABLE_CHANGE, "onCreate: TableViewModel Change")
             tables.forEachIndexed { index, table ->
-                table.text = it[index].name
+                table.text = it[index].table.name
                 table.setOnClickListener(this)
             }
         })
@@ -52,18 +56,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, LifecycleOwner {
     }
 
     override fun onClick(v: View?) {
-        val table = when(v!!.id) {
-            R.id.table1 -> "Table 1"
-            R.id.table2 -> "Table 2"
-            R.id.table3 -> "Table 3"
-            R.id.table4 -> "Table 4"
-            else -> ""
+        val tableId = when(v!!.id) {
+            R.id.table1 -> 1
+            R.id.table2 -> 2
+            R.id.table3 -> 3
+            R.id.table4 -> 4
+            else -> 0
         }
 
-        Log.i(LOG_SELECTED_TABLE, "onClick: $table")
+        Log.i(LOG_SELECTED_TABLE, "onClick: $tableId")
 
         val intent = Intent(this, CustomerListActivity::class.java).apply {
-            putExtra("table", table)
+            putExtra("tableId", tableId)
         }
 
         startActivity(intent)

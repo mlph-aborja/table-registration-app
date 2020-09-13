@@ -1,5 +1,0 @@
-package com.example.tableregistration
-
-const val LOG_SELECTED_TABLE = "SELECTED_TABLE"
-const val LOG_INIT_TABLE_VIEW_MODEL = "INIT_TABLE_VIEW_MODEL"
-const val LOG_OBSERVE_TABLE_CHANGE = "OBSERVE_TABLE_CHANGE"

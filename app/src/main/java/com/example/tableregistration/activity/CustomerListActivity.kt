@@ -1,0 +1,44 @@
+package com.example.tableregistration.activity
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import com.example.tableregistration.R
+import com.example.tableregistration.constant.LOG_SELECTED_TABLE
+import com.example.tableregistration.model.TableViewModel
+
+class CustomerListActivity : AppCompatActivity() {
+
+    private lateinit var tableViewModel: TableViewModel
+
+    private val activityTitle by lazy {
+        findViewById<TextView>(R.id.activity_title)
+    }
+
+    private val customerList by lazy {
+        findViewById<ListView>(R.id.customer_list)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_customer_list)
+
+        tableViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application))
+            .get(TableViewModel::class.java)
+
+        tableViewModel.selectedTable.observe(this, {
+            Log.i(LOG_SELECTED_TABLE, "onCreate: ${it.table.name}")
+            activityTitle.text = it.table.name
+
+            val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, it.customers)
+            customerList.adapter = adapter
+        })
+
+        val tableId = intent.getIntExtra("tableId", 0)
+        tableViewModel.setSelectedTable(tableId)
+    }
+}
