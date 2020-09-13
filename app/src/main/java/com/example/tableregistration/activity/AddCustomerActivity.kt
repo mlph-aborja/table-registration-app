@@ -1,11 +1,15 @@
 package com.example.tableregistration.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.View
 import android.widget.*
+import android.widget.AdapterView.OnItemSelectedListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.tableregistration.R
 import com.example.tableregistration.model.TableViewModel
+
 
 class AddCustomerActivity : AppCompatActivity() {
 
@@ -31,8 +35,11 @@ class AddCustomerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_customer)
 
-        tableViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application))
-            .get(TableViewModel::class.java)
+        tableViewModel = ViewModelProvider(
+            this, ViewModelProvider.AndroidViewModelFactory(
+                application
+            )
+        ).get(TableViewModel::class.java)
 
         tableViewModel.tables.observe(this, {
             val adapter = ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, it)
@@ -41,12 +48,36 @@ class AddCustomerActivity : AppCompatActivity() {
             tableSpinner.adapter = adapter
         })
 
+        tableSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val tableId: Int = 1 + position
+                tableViewModel.setSelectedTable(tableId)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                val defaultTable = 1
+                tableViewModel.setSelectedTable(defaultTable)
+            }
+        }
+
         addCustomer.setOnClickListener {
             val customerName = customerName.text.toString()
-            val tableId: Int = 1 + tableSpinner.selectedItemId.toInt()
 
-            tableViewModel.saveCustomer(customerName = customerName, tableId = tableId)
-            finish()
+            if (tableViewModel.isTableFull()) {
+                AlertDialog.Builder(this)
+                    .setTitle("Table is fully occupied")
+                    .setMessage("Five customers are allowed per table")
+                    .setCancelable(false)
+                    .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }.show()
+            } else {
+                tableViewModel.saveCustomer(customerName = customerName)
+                finish()
+            }
         }
 
         activityTitle.text = getString(R.string.add_customer)

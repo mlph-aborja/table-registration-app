@@ -40,8 +40,9 @@ class TableViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
-    fun saveCustomer(customerName: String, tableId: Int) {
+    fun saveCustomer(customerName: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            val tableId = selectedTable.value?.table?.tableId!!
             customerRepository.saveCustomer(Customer(0, customerName, tableId))
             initTableWithCustomers()
         }
@@ -61,5 +62,9 @@ class TableViewModel(app: Application) : AndroidViewModel(app) {
             }
             initTableWithCustomers()
         }
+    }
+
+    fun isTableFull(): Boolean {
+        return selectedTable.value?.customers?.size!! >= 5
     }
 }
