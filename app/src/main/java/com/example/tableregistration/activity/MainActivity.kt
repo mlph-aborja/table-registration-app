@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.example.tableregistration.constant.LOG_OBSERVE_TABLE_CHANGE
@@ -53,6 +54,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, LifecycleOwner {
             return true
         } else if (item.itemId == R.id.menu_clear_tables) {
             tableViewModel.clearTables()
+            Toast.makeText(this, "All tables has been cleared", Toast.LENGTH_LONG).show()
             return true
         }
         return super.onOptionsItemSelected(item)

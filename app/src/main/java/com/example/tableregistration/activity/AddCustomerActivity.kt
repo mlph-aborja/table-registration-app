@@ -76,6 +76,7 @@ class AddCustomerActivity : AppCompatActivity() {
                     .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }.show()
             } else {
                 tableViewModel.saveCustomer(customerName = customerName)
+                Toast.makeText(this, "$customerName has been added",Toast.LENGTH_LONG).show()
                 finish()
             }
         }

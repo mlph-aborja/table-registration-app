@@ -4,10 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.example.tableregistration.R
 import com.example.tableregistration.constant.LOG_SELECTED_TABLE
@@ -46,6 +43,7 @@ class CustomerListActivity : AppCompatActivity() {
 
         clearTable.setOnClickListener{
             tableViewModel.clearTable()
+            Toast.makeText(this, "Table has been cleared", Toast.LENGTH_LONG).show()
             finish()
         }
 
