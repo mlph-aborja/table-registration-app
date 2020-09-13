@@ -28,4 +28,8 @@ class CustomerRepository(val app: Application) {
     fun deleteAllCustomer() {
         customerDao.deleteAll()
     }
+
+    fun deleteCustomerById(customerId: Int) {
+        customerDao.deletebyId(customerId)
+    }
 }

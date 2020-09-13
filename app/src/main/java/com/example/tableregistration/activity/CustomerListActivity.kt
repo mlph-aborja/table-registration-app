@@ -1,9 +1,11 @@
 package com.example.tableregistration.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -23,6 +25,10 @@ class CustomerListActivity : AppCompatActivity() {
         findViewById<ListView>(R.id.customer_list)
     }
 
+    private val clearTable by lazy {
+        findViewById<Button>(R.id.clear_table)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_customer_list)
@@ -37,6 +43,11 @@ class CustomerListActivity : AppCompatActivity() {
             val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, it.customers)
             customerList.adapter = adapter
         })
+
+        clearTable.setOnClickListener{
+            tableViewModel.clearTable()
+            finish()
+        }
 
         val tableId = intent.getIntExtra("tableId", 0)
         tableViewModel.setSelectedTable(tableId)

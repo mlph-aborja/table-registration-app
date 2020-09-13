@@ -53,4 +53,13 @@ class TableViewModel(app: Application) : AndroidViewModel(app) {
             initTableWithCustomers()
         }
     }
+
+    fun clearTable() {
+        CoroutineScope(Dispatchers.IO).launch {
+            selectedTable.value?.customers?.forEach {
+                customerRepository.deleteCustomerById(it.customerId)
+            }
+            initTableWithCustomers()
+        }
+    }
 }

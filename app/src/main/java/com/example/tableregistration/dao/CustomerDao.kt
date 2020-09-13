@@ -19,4 +19,7 @@ interface CustomerDao {
     @Query("DELETE FROM customer")
     fun deleteAll()
 
+    @Query("DELETE FROM customer WHERE customerId = :customerId")
+    fun deletebyId(customerId: Int)
+
 }
