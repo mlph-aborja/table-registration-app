@@ -36,10 +36,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, LifecycleOwner {
         tableViewModel.tables.observe(this, {
             Log.i(LOG_OBSERVE_TABLE_CHANGE, "onCreate: TableViewModel Change")
             tables.forEachIndexed { index, table ->
-                table.text = it[index].table.name
+                val buttonText = "${it[index].table.name}\nCustomers: ${it[index].customers.size}"
+                table.text = buttonText
                 table.setOnClickListener(this)
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        tableViewModel.initTableWithCustomers()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
