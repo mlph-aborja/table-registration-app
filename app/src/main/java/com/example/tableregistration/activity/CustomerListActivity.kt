@@ -48,5 +48,7 @@ class CustomerListActivity : AppCompatActivity() {
 
         val tableId = intent.getIntExtra("tableId", 0)
         tableViewModel.setSelectedTable(tableId)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

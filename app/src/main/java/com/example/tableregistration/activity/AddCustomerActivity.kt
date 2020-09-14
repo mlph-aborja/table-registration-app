@@ -86,7 +86,7 @@ class AddCustomerActivity : AppCompatActivity() {
                     .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }.show()
             } else {
                 tableViewModel.saveCustomer(customerName = customerName)
-                Toast.makeText(this, "$customerName has been added table",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "$customerName has been added to table",Toast.LENGTH_LONG).show()
                 createNotificationChannel()
                 sendNotification(customerName)
                 finish()
@@ -94,6 +94,7 @@ class AddCustomerActivity : AppCompatActivity() {
         }
 
         activityTitle.text = getString(R.string.add_customer)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun sendNotification(customerName: String) {
